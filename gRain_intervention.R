@@ -4,15 +4,14 @@ library(gRain)
 library(doParallel)
 library(foreach)
 
+
 flat_eq_dag_chains <- flat_eq_dag_chains[seq(1, length(flat_eq_dag_chains$state), by = 100)]
-
-
 
 cores <- 8
 cl <- makeCluster(cores)  
 registerDoParallel(cl)
 
-#Grain and finds results while you can change the evidence
+# Finds intervention results with the option to change evidence state
 n = 0
 EU_results <- as.data.frame(matrix(ncol = length(after_nodes) + 1, nrow = length(flat_eq_dag_chains$state)))
 colnames(EU_results) <- after_nodes 
@@ -92,8 +91,6 @@ evidence_string <- paste(unlist(evidence), collapse = "")
 
 EU_results <- rbind(mean_df, sd_df)
 write.csv(EU_results, file = paste0(evidence_string, "_results.csv"))
-
-
 
 # Parallel loop using all evidences that have a count while ranking the domains. 
 
