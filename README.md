@@ -13,4 +13,7 @@ Each code will have a comment provided at the top of each script, summarising th
 3. Calculate the domain's utility function using 'gRain_intervention.R' script.
 4. Find the idealised interventions based on their expected utility with 'Intervention Summary.R' script.
 
-Note that some of these codes use functions from internal library; 'cia' which can be accessed from the following link: https://github.com/SpaceOdyssey/cia 
+## Libraries
+Note that some of these codes use functions from internal libraries; 'cia' and 'rdigidata' which can be accessed from the following link: https://github.com/SpaceOdyssey/cia. The library 'rdigidata' is used to deal with Innowell data which is available upon request.
+
+Some of the code also use libraries: tidyverse, gRain, doParallel, foreach, dagitty, ggplot2. Be sure to install these packages for the code to be reproducible 
