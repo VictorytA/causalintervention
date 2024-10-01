@@ -1,4 +1,4 @@
-#This finds the edge probabilities 
+#This code will generate the Consensus graph summarising the posterior distribution of DAGs (Figure 2)
 p_edge <- CalculateEdgeProbabilities(flat_eq_dag_chains)
 
 custom_labels <- c(
@@ -57,51 +57,4 @@ qgraph::qgraph(p_edge,
 )
 dev.off()
 
-#CPDAG Map
 
-groups <- list(baseline = which(endsWith(colnames(cpdag_map$state[[1]]), 'base')),   
-            "follow-up" = which(endsWith(colnames(cpdag_map$state[[1]]), 'after')))
-
-colour <- RColorBrewer::brewer.pal(n = 3, name = "Set1")
-edge_colours_matrix <- matrix("black", ncol = ncol(cpdag_map$state[[1]]), nrow = nrow(cpdag_map$state[[1]]),
-                              dimnames = list(rownames(cpdag_map$state[[1]]), colnames(cpdag_map$state[[1]])))
-for (i in 1:14) {
-  if (grepl("_base", colnames(edge_colours_matrix)[i])) {
-    for (j in 1:14) {
-      if (grepl("_after", colnames(edge_colours_matrix)[j])) {
-        edge_colours_matrix[i, j] <- "orange"
-      }
-    }
-  }
-}
-
-for (i in 1:14) {
-  if (grepl("_after", colnames(edge_colours_matrix)[i])) {
-    for (j in 1:14) {
-      if (grepl("_base", colnames(edge_colours_matrix)[j])) {
-        edge_colours_matrix[i, j] <- "orange"
-      }
-    }
-  }
-}
-
-
-pdf("CPDAG_MAP.pdf",
-    width = 9,
-    height = 7)
-qgraph::qgraph(cpdag_map$state[[1]],
-               layout = "groups",
-               groups = groups,
-               color = colour,
-               minimum = 0,
-               edge.color = edge_colours_matrix,
-               edge.width = 0.5,
-               label.cex =  0.7,
-               legend.cex = 0.4,
-               label.scale = FALSE,
-               layoutScale = c(1.2, 1),
-               GLratio = 3.0,
-               mar = c(5, 5, 5, 5),
-               legend = TRUE,
-               labels = custom_labels)
-dev.off()
