@@ -1,6 +1,6 @@
 # causalintervention
 
-This repository is a supplement to the causal intervention paper. The code provided is used specifically for the data used for the paper but the methods can be used for other datasets. 
+This repository is a supplement to the causal intervention paper. The code provided is specifically designed for the data used for the paper but the methods can be used for other datasets. 
 
 ## Data 
 
